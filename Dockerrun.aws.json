@@ -3,21 +3,21 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "kristikristo/multi-client",
+      "image": "kristikristo/client",
       "hostname": "client",
       "essential": false,
       "memory": 128
     },
     {
       "name": "server",
-      "image": "kristikristo/multi-server",
+      "image": "kristikristo/server",
       "hostname": "api",
       "essential": false,
       "memory": 128
     },
     {
       "name": "nginx",
-      "image": "kristikristo/multi-nginx",
+      "image": "kristikristo/nginx",
       "hostname": "nginx",
       "essential": true,
       "portMappings": [
