@@ -1,0 +1,33 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kristikristo/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kristikristo/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kristikristo/client ./client
+  - docker build -t kristikristo/server ./server
+  - docker build -t kristikristo/nginx ./nginx
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push kristikristo/client
+  - docker push kristikristo/server
+  - docker push kristikristo/nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: multi-services-deployment
+  env: MultiServicesDeployment-env
+  bucket_name: elasticbeanstalk-eu-central-1-485652621123
+  bucket_path: multi-services-deployment
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
