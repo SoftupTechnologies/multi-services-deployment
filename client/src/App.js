@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React with Softup Technologies!
+          Learn React with Softup Technologies! You are all an awesome audience!
         </a>
       </header>
     </div>
