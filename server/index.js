@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hi from Softup!');
+  res.send('Hi!');
 });
 
 app.get('/health', (req, res) => {
